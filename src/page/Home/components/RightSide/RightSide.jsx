@@ -1,6 +1,6 @@
 import React from "react";
 import { MonthComponent } from "./_MonthComponent";
-
+console.log("Right Side");
 export const RightSide = ({
   onToday: onTodayHandler,
   currentDate,
