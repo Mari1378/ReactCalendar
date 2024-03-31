@@ -13,23 +13,25 @@ export const MonthComponent = ({ currentDate, selectedDate }) => {
                   className="text-l text-gray-900 font-thin border border-gray-200 w-full flex items-center p-2 flex-col "
                   key={uuid()}
                 >
-                  {index === 0 ? (
+                  {index === 0 && days ? (
                     <p key={uuid()}>{days.format("dddd")}</p>
                   ) : null}
                   <p
                     className="h-8 w-8 flex justify-center items-center"
                     style={
-                      selectedDate.format("DD/MM/YYYY") ===
-                      days.format("DD/MM/YYYY")
-                        ? {
-                            backgroundColor: "blue",
-                            borderRadius: "100%",
-                            color: "white",
-                          }
+                      days
+                        ? selectedDate.format("DD/MM/YYYY") ===
+                          days.format("DD/MM/YYYY")
+                          ? {
+                              backgroundColor: "blue",
+                              borderRadius: "100%",
+                              color: "white",
+                            }
+                          : {}
                         : {}
                     }
                   >
-                    {days.get("D")}
+                    {days ? days.get("D") : null}
                   </p>
                 </div>
               );

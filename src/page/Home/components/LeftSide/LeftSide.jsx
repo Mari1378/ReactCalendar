@@ -43,19 +43,23 @@ export const LeftSide = ({
               {week.map((dateObject) => {
                 return (
                   <span
-                    onClick={() => onSelectDayHandler(dateObject)}
+                    onClick={() => {
+                      if (dateObject != null) onSelectDayHandler(dateObject);
+                    }}
                     className="w-8 h-8 flex justify-center items-center"
                     style={
-                      selectedDate.format("DD/MM/YYYY") ===
-                      dateObject.format("DD/MM/YYYY")
-                        ? { backgroundColor: "blue", borderRadius: "100%" }
-                        : isToDay(dateObject)
-                        ? { backgroundColor: "red", borderRadius: "100%" }
+                      dateObject != null
+                        ? selectedDate.format("DD/MM/YYYY") ===
+                          dateObject?.format("DD/MM/YYYY")
+                          ? { backgroundColor: "blue", borderRadius: "100%" }
+                          : isToDay(dateObject)
+                          ? { backgroundColor: "red", borderRadius: "100%" }
+                          : {}
                         : {}
                     }
                     key={uuid()}
                   >
-                    {dateObject.get("D")}
+                    {dateObject != null ? dateObject.get("D") : null}
                   </span>
                 );
               })}
