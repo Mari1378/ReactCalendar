@@ -1,7 +1,6 @@
 import React from "react";
-import { calenderCreator } from "../utils/Date";
+import { calenderCreator } from "../../../utils/Date";
 import { v4 as uuid } from "uuid";
-import { daysOfWeek } from "../constants/Date";
 export const MonthComponent = ({ currentDate, selectedDate }) => {
   return (
     <div className="flex flex-col grow">

@@ -1,5 +1,5 @@
 import React from "react";
-import { MonthComponent } from "./MonthComponent";
+import { MonthComponent } from "./_MonthComponent";
 
 export const RightSide = ({
   onToday: onTodayHandler,
