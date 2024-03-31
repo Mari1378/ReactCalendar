@@ -2,6 +2,7 @@ import { calenderCreator, isToDay } from "../../../utils/Date";
 import { ArrowLeftIcon, ArrowRightIcon } from "../../../assets/icons/Icon";
 import { v4 as uuid } from "uuid";
 import { daysOfWeek } from "../../../constants/Date";
+console.log("test");
 export const LeftSide = ({
   currentDate,
   selectedDate,
