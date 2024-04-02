@@ -10,7 +10,7 @@ export const LeftSide = ({
   onSelectDay: onSelectDayHandler,
 }) => {
   return (
-    <div className="h-screen p-4 w-[300px] bg-black text-white">
+    <div className="h-screen p-4 w-[350px] bg-black text-white ">
       <div className="flex justify-between items-center mb-3">
         <p className="font-bold text-2xl  ml-[6px]">
           {currentDate.format("MMMM")} - {currentDate.format("YYYY")}

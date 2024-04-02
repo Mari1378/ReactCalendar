@@ -14,16 +14,16 @@ export function calenderCreator(currentDate) {
 }
 
 function createCalendarWithMonthAndYear(month, year) {
-  const firstOfMonthDay = dayjs(new Date(year, month, 1)).day();
+  const firstDayOfMonth = dayjs(new Date(year, month, 1)).day();
   let listOfDay = new Array(6).fill([]).map((row, i) => {
     return new Array(7).fill(null).map((day, j) => {
-      if (i === 0 && firstOfMonthDay >= 0) {
-        if (j < firstOfMonthDay) {
+      if (i === 0 && firstDayOfMonth >= 0) {
+        if (j < firstDayOfMonth) {
           return null;
         }
       }
       const dateOfDay = dayjs(
-        new Date(year, month, i * 7 + (j + 1 - firstOfMonthDay))
+        new Date(year, month, i * 7 + (j + 1 - firstDayOfMonth))
       );
       return dateOfDay.month() === month ? dateOfDay : null;
     });
