@@ -1,7 +1,16 @@
 import React from "react";
 import { calenderCreator } from "../../../../utils/Date";
 import { v4 as uuid } from "uuid";
-export const MonthComponent = ({ currentDate, selectedDate }) => {
+import { Modal } from "../Modal";
+export const MonthComponent = ({
+  currentDate,
+  selectedDate,
+  isOpen,
+  setIsOpen,
+}) => {
+  const onOpenModalHandler = () => {
+    setIsOpen(true);
+  };
   const dayOfWeek = [
     "Sunday",
     "Monday",
@@ -25,14 +34,14 @@ export const MonthComponent = ({ currentDate, selectedDate }) => {
           );
         })}
       </div>
-
       {calenderCreator(currentDate).map((weeks, index) => {
         return (
           <div key={uuid()} className="flex h-full ">
             {weeks.map((days) => {
               return (
                 <div
-                  className="text-l text-gray-900 font-thin border border-gray-200 w-full flex items-center p-2 flex-col "
+                  onClick={onOpenModalHandler}
+                  className="text-l cursor-pointer text-gray-900 font-thin border border-gray-200 w-full flex items-center p-2 flex-col "
                   key={uuid()}
                 >
                   <p
@@ -58,6 +67,7 @@ export const MonthComponent = ({ currentDate, selectedDate }) => {
           </div>
         );
       })}
+      {isOpen ? <Modal setIsOpen={setIsOpen} /> : null}
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { MonthComponent } from "./_MonthComponent";
 import { DayComponent } from "./_DayComponent";
+import { Modal } from "../Modal";
 export const RightSide = ({
   onToday: onTodayHandler,
   currentDate,
@@ -8,6 +9,7 @@ export const RightSide = ({
 }) => {
   const [isMonth, setIsMonth] = useState(true);
   const [isDay, setIsDay] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const onMonthHandler = () => {
     setIsDay(false);
     setIsMonth(true);
@@ -39,9 +41,13 @@ export const RightSide = ({
         </div>
       </div>
       {isMonth ? (
-        <MonthComponent currentDate={currentDate} selectedDate={selectedDate} />
+        <MonthComponent
+          isOpen={isOpen}
+          currentDate={currentDate}
+          selectedDate={selectedDate}
+        />
       ) : (
-        <DayComponent />
+        <DayComponent isOpen={isOpen} setIsOpen={setIsOpen} />
       )}
     </div>
   );
