@@ -7,7 +7,7 @@ export const Modal = ({ setIsOpen }) => {
   };
   const inputRef = useRef("");
   return (
-    <div className="fixed shadow-2xl inset-y-1/4 inset-x-[550px] flex gap-8 flex-col bg-white w-[320px] h-[400px] rounded-lg">
+    <div className="fixed shadow-2xl inset-y-1/4 inset-x-[550px] flex gap-4 flex-col bg-white w-[320px] h-[400px] rounded-lg">
       <button
         onClick={onCloseModalHandler}
         className="px-4 py-2 text-gray-500 flex justify-end w-full h-11 text-2xl  bg-gray-100"
@@ -22,8 +22,8 @@ export const Modal = ({ setIsOpen }) => {
           placeholder="Add title"
         />
       </div>
-      <div className="px-5 text-gray-700 text-lg">
-        <p className="mb-4">Select the topic</p>
+      <div className="px-5 text-gray-700 text-lg mb-8">
+        <p className="mb-6">Select the topic</p>
         <div className="flex gap-2">
           <div className="rounded-full w-8 h-8 bg-[#1c48ff]"></div>
           <div className="rounded-full w-8 h-8 bg-[#1ba71b]"></div>
@@ -31,6 +31,9 @@ export const Modal = ({ setIsOpen }) => {
           <div className="rounded-full w-8 h-8 bg-[#8b8b8f]"></div>
         </div>
       </div>
+      <button className="ml-52 bg-[#94a3b8] px-3 py-2 w-24 text-[18px] text-white rounded">
+        Save
+      </button>
     </div>
   );
 };

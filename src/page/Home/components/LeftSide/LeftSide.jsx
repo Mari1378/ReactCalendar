@@ -11,7 +11,7 @@ export const LeftSide = ({
 }) => {
   return (
     <div className="h-screen p-4 w-[350px] bg-black text-white ">
-      <div className="flex justify-between items-center mb-3">
+      <div className="flex justify-between items-center mb-8">
         <p className="font-bold text-2xl  ml-[6px]">
           {currentDate.format("MMMM")} - {currentDate.format("YYYY")}
         </p>
@@ -66,6 +66,27 @@ export const LeftSide = ({
             </div>
           );
         })}
+      </div>
+      <div className="mt-12">
+        <p className="text-xl text-gray-400 font-bold mb-8">Label</p>
+        <div className="flex flex-col gap-4">
+          <div className="flex items-center gap-4">
+            <div className="rounded-full w-8 h-8 bg-[#1c48ff]"></div>
+            <p className="text-gray-300">work</p>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="rounded-full w-8 h-8 bg-[#1ba71b]"></div>
+            <p className="text-gray-300">Gym</p>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="rounded-full w-8 h-8 bg-[#ee2727]"></div>
+            <p className="text-gray-300">Free</p>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="rounded-full w-8 h-8 bg-[#8b8b8f]"></div>
+            <p className="text-gray-300">Education</p>
+          </div>
+        </div>
       </div>
     </div>
   );

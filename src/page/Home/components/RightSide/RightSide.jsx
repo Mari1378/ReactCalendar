@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { MonthComponent } from "./_MonthComponent";
 import { DayComponent } from "./_DayComponent";
-import { Modal } from "../Modal";
 export const RightSide = ({
   onToday: onTodayHandler,
   currentDate,
@@ -43,6 +42,7 @@ export const RightSide = ({
       {isMonth ? (
         <MonthComponent
           isOpen={isOpen}
+          setIsOpen={setIsOpen}
           currentDate={currentDate}
           selectedDate={selectedDate}
         />
