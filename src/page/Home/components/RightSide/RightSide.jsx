@@ -8,7 +8,7 @@ export const RightSide = ({
 }) => {
   const [isMonth, setIsMonth] = useState(true);
   const [isDay, setIsDay] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [dateForAddTask, setDateForAddTask] = useState();
   const onMonthHandler = () => {
     setIsDay(false);
     setIsMonth(true);
@@ -41,13 +41,16 @@ export const RightSide = ({
       </div>
       {isMonth ? (
         <MonthComponent
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
+          dateForAddTask={dateForAddTask}
+          setDateForAddTask={setDateForAddTask}
           currentDate={currentDate}
           selectedDate={selectedDate}
         />
       ) : (
-        <DayComponent isOpen={isOpen} setIsOpen={setIsOpen} />
+        <DayComponent
+          dateForAddTask={dateForAddTask}
+          setDateForAddTask={setDateForAddTask}
+        />
       )}
     </div>
   );

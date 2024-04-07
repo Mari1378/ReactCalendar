@@ -4,7 +4,7 @@ import { DeleteIcon } from "../../../../assets/icons/Icon";
 export const Category = ({ title, color, onDeleteCategory, id }) => {
   return (
     <li>
-      <div className="flex items-center justify-between text-gray-300">
+      <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div
             style={{ backgroundColor: `${color}` }}

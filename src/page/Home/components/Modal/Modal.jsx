@@ -2,10 +2,10 @@ import React, { useReducer, useRef } from "react";
 import { CloseIcon, DeleteIcon } from "../../../../assets/icons/Icon";
 import { v4 as uuid } from "uuid";
 
-export const Modal = ({ setIsOpen, addTodo, deleteTodo, inputRef }) => {
+export const Modal = ({ setDateForAddTask, addTodo, deleteTodo, inputRef }) => {
   // ........................................
   const onCloseModalHandler = () => {
-    setIsOpen(false);
+    setDateForAddTask(undefined);
   };
 
   return (

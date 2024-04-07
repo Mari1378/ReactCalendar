@@ -1,4 +1,4 @@
-import React, { useReducer, useRef } from "react";
+import React, { useEffect, useReducer, useRef } from "react";
 import { calenderCreator } from "../../../../utils/Date";
 import { v4 as uuid } from "uuid";
 import { Modal } from "../Modal/Modal";
@@ -18,14 +18,17 @@ const reducer = (prevTodos, action) => {
 export const MonthComponent = ({
   currentDate,
   selectedDate,
-  isOpen,
-  setIsOpen,
+  dateForAddTask,
+  setDateForAddTask,
 }) => {
   const [todos, dispatch] = useReducer(reducer, initialtodo);
   const inputRef = useRef("");
+  useEffect(() => {
+    console.log(todos);
+  }, [todos]);
   // ..................................
-  const onOpenModalHandler = () => {
-    setIsOpen(true);
+  const onOpenModalHandler = (date) => {
+    setDateForAddTask(date);
   };
   // .....................................
   const addTodo = () => {
@@ -34,9 +37,10 @@ export const MonthComponent = ({
       payload: {
         id: uuid(),
         title: inputRef.current.value,
+        Date: dateForAddTask,
       },
     });
-    setIsOpen(false);
+    setDateForAddTask(undefined);
   };
 
   const deleteTodo = (todoId) => {
@@ -69,22 +73,22 @@ export const MonthComponent = ({
           );
         })}
       </div>
-      {calenderCreator(currentDate).map((weeks, index) => {
+      {calenderCreator(currentDate).map((weeks) => {
         return (
           <div key={uuid()} className="flex h-full ">
-            {weeks.map((days) => {
+            {weeks.map((day) => {
               return (
                 <div
-                  onClick={onOpenModalHandler}
+                  onClick={() => onOpenModalHandler(day)}
                   className="text-l cursor-pointer text-gray-900 font-thin border border-gray-200 w-full flex items-center p-2 flex-col "
                   key={uuid()}
                 >
                   <p
                     className="h-8 w-8 flex justify-center items-center"
                     style={
-                      days
+                      day
                         ? selectedDate.format("DD/MM/YYYY") ===
-                          days.format("DD/MM/YYYY")
+                          day.format("DD/MM/YYYY")
                           ? {
                               backgroundColor: "blue",
                               borderRadius: "100%",
@@ -94,10 +98,16 @@ export const MonthComponent = ({
                         : {}
                     }
                   >
-                    {days ? days.get("D") : null}
+                    {day ? day.get("D") : null}
                   </p>
+
                   <ul>
                     {todos.map((todo) => {
+                      if (
+                        todo.Date.format("DD/MM/YYYY") !==
+                        day?.format("DD/MM/YYYY")
+                      )
+                        return null;
                       return <li key={todo.id}>{todo.title}</li>;
                     })}
                   </ul>
@@ -107,9 +117,9 @@ export const MonthComponent = ({
           </div>
         );
       })}
-      {isOpen ? (
+      {dateForAddTask ? (
         <Modal
-          setIsOpen={setIsOpen}
+          setDateForAddTask={setDateForAddTask}
           addTodo={addTodo}
           deleteTodo={deleteTodo}
           inputRef={inputRef}

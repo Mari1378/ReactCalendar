@@ -71,7 +71,7 @@ export const LeftSide = ({
       <div className="flex gap-2 flex-col  ">
         {calenderCreator(currentDate).map((week) => {
           return (
-            <div className=" flex justify-between" key={uuid()}>
+            <div className="flex justify-between" key={uuid()}>
               {week.map((dateObject) => {
                 return (
                   <span
@@ -99,8 +99,8 @@ export const LeftSide = ({
           );
         })}
       </div>
-      <div className="mt-12 flex flex-col gap-4">
-        <p>Select Your Category</p>
+      <div className="mt-12 flex flex-col gap-4 text-gray-300">
+        <p>Add Your Category</p>
         <div className=" flex gap-2 items-center">
           <input
             type="text"
