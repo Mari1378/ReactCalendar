@@ -1,16 +1,51 @@
-import React from "react";
+import React, { useReducer, useRef } from "react";
 import { calenderCreator } from "../../../../utils/Date";
 import { v4 as uuid } from "uuid";
-import { Modal } from "../Modal";
+import { Modal } from "../Modal/Modal";
+const initialtodo = [];
+const reducer = (prevTodos, action) => {
+  switch (action.type) {
+    case "ADD": {
+      return [...prevTodos, action.payload];
+    }
+    case "DELETE": {
+      return prevTodos.filter((todo) => todo.id == action.payload);
+    }
+    default:
+      return prevTodos;
+  }
+};
 export const MonthComponent = ({
   currentDate,
   selectedDate,
   isOpen,
   setIsOpen,
 }) => {
+  const [todos, dispatch] = useReducer(reducer, initialtodo);
+  const inputRef = useRef("");
+  // ..................................
   const onOpenModalHandler = () => {
     setIsOpen(true);
   };
+  // .....................................
+  const addTodo = () => {
+    dispatch({
+      type: "ADD",
+      payload: {
+        id: uuid(),
+        title: inputRef.current.value,
+      },
+    });
+    setIsOpen(false);
+  };
+
+  const deleteTodo = (todoId) => {
+    dispatch({
+      type: "DELETE",
+      payload: todoId,
+    });
+  };
+
   const dayOfWeek = [
     "Sunday",
     "Monday",
@@ -61,13 +96,25 @@ export const MonthComponent = ({
                   >
                     {days ? days.get("D") : null}
                   </p>
+                  <ul>
+                    {todos.map((todo) => {
+                      return <li key={todo.id}>{todo.title}</li>;
+                    })}
+                  </ul>
                 </div>
               );
             })}
           </div>
         );
       })}
-      {isOpen ? <Modal setIsOpen={setIsOpen} /> : null}
+      {isOpen ? (
+        <Modal
+          setIsOpen={setIsOpen}
+          addTodo={addTodo}
+          deleteTodo={deleteTodo}
+          inputRef={inputRef}
+        />
+      ) : null}
     </div>
   );
 };

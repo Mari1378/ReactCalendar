@@ -2,6 +2,8 @@ import { calenderCreator, isToDay } from "../../../../utils/Date";
 import { ArrowLeftIcon, ArrowRightIcon } from "../../../../assets/icons/Icon";
 import { v4 as uuid } from "uuid";
 import { daysOfWeek } from "../../../../constants/Date";
+import { useState } from "react";
+import { Category } from "./Category";
 export const LeftSide = ({
   currentDate,
   selectedDate,
@@ -9,8 +11,38 @@ export const LeftSide = ({
   onGoToPrevMonth: onGoToPrevMonthHandler,
   onSelectDay: onSelectDayHandler,
 }) => {
+  const [Topic, setTopic] = useState([]);
+  const [value, setValue] = useState("");
+  const [color, setColor] = useState("#00FA6C");
+
+  // ........................................................
+  const onAddHandler = () => {
+    if (value) {
+      if (Topic.length <= 4) {
+        setTopic([
+          ...Topic,
+          {
+            title: value,
+            id: uuid(),
+            color: color,
+          },
+        ]);
+        setValue("");
+        setColor("#00FA6C");
+      }
+    }
+  };
+  // ..........................................................
+
+  const onDeleteCategory = (id) => {
+    const newTopic = Topic.filter((item) => {
+      return item.id !== id;
+    });
+    setTopic(newTopic);
+  };
+  // ............................................................
   return (
-    <div className="h-screen p-4 w-[350px] bg-black text-white ">
+    <div className="h-screen p-4 w-[350px] bg-black text-white overflow-auto">
       <div className="flex justify-between items-center mb-8">
         <p className="font-bold text-2xl  ml-[6px]">
           {currentDate.format("MMMM")} - {currentDate.format("YYYY")}
@@ -67,26 +99,50 @@ export const LeftSide = ({
           );
         })}
       </div>
-      <div className="mt-12">
-        <p className="text-xl text-gray-400 font-bold mb-8">Label</p>
-        <div className="flex flex-col gap-4">
-          <div className="flex items-center gap-4">
-            <div className="rounded-full w-8 h-8 bg-[#1c48ff]"></div>
-            <p className="text-gray-300">work</p>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="rounded-full w-8 h-8 bg-[#1ba71b]"></div>
-            <p className="text-gray-300">Gym</p>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="rounded-full w-8 h-8 bg-[#ee2727]"></div>
-            <p className="text-gray-300">Free</p>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="rounded-full w-8 h-8 bg-[#8b8b8f]"></div>
-            <p className="text-gray-300">Education</p>
-          </div>
+      <div className="mt-12 flex flex-col gap-4">
+        <p>Select Your Category</p>
+        <div className=" flex gap-2 items-center">
+          <input
+            type="text"
+            placeholder="inter your topic"
+            className="bg-black border border-gray-400  px-2 h-8"
+            value={value}
+            onChange={(e) => {
+              setValue(e.target.value);
+            }}
+          />
+          <input
+            type="color"
+            id="colorPicker"
+            value={color}
+            className="h-8"
+            onChange={(e) => {
+              setColor(e.target.value);
+            }}
+          />
         </div>
+        {Topic.length === 5 ? (
+          <span className="text-red-600">You can have 5 categories</span>
+        ) : null}
+        <button
+          onClick={onAddHandler}
+          className="bg-gray-400 rounded mb-8 px-2 h-8 text-gray-900 w-full"
+        >
+          Add Category
+        </button>
+        <ul className="flex flex-col gap-8">
+          {Topic.map((item) => {
+            return (
+              <Category
+                key={item.id}
+                id={item.id}
+                title={item.title}
+                color={item.color}
+                onDeleteCategory={onDeleteCategory}
+              />
+            );
+          })}
+        </ul>
       </div>
     </div>
   );
