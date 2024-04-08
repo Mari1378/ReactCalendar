@@ -34,6 +34,7 @@ export const Home = () => {
         currentDate={currentDate}
         onToday={onTodayHandler}
         selectedDate={selectedDate}
+        onSelectDay={onSelectDayHandler}
       />
     </div>
   );

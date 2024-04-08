@@ -1,14 +1,54 @@
-import React, { useState } from "react";
+import React, { useReducer, useRef, useState } from "react";
 import { MonthComponent } from "./_MonthComponent";
 import { DayComponent } from "./_DayComponent";
+import { v4 as uuid } from "uuid";
+
+const initialtodo = [];
+const reducer = (prevTodos, action) => {
+  switch (action.type) {
+    case "ADD": {
+      return [...prevTodos, action.payload];
+    }
+    case "DELETE": {
+      return prevTodos.filter((todo) => todo.id == action.payload);
+    }
+    default:
+      return prevTodos;
+  }
+};
 export const RightSide = ({
   onToday: onTodayHandler,
   currentDate,
   selectedDate,
+  onSelectDay: onSelectDayHandler,
 }) => {
+  const [todos, dispatch] = useReducer(reducer, initialtodo);
+  const inputRef = useRef("");
   const [isMonth, setIsMonth] = useState(true);
   const [isDay, setIsDay] = useState(false);
   const [dateForAddTask, setDateForAddTask] = useState();
+  // .................................
+
+  const addTodo = () => {
+    dispatch({
+      type: "ADD",
+      payload: {
+        id: uuid(),
+        title: inputRef.current.value,
+        Date: dateForAddTask,
+      },
+    });
+    setDateForAddTask(undefined);
+  };
+
+  const deleteTodo = (todoId) => {
+    dispatch({
+      type: "DELETE",
+      payload: todoId,
+    });
+  };
+
+  // .................................
   const onMonthHandler = () => {
     setIsDay(false);
     setIsMonth(true);
@@ -45,6 +85,11 @@ export const RightSide = ({
           setDateForAddTask={setDateForAddTask}
           currentDate={currentDate}
           selectedDate={selectedDate}
+          todos={todos}
+          addTodo={addTodo}
+          deleteTodo={deleteTodo}
+          inputRef={inputRef}
+          onSelectDay={onSelectDayHandler}
         />
       ) : (
         <DayComponent

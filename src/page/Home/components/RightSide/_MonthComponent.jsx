@@ -1,54 +1,24 @@
-import React, { useEffect, useReducer, useRef } from "react";
+import React from "react";
 import { calenderCreator } from "../../../../utils/Date";
-import { v4 as uuid } from "uuid";
 import { Modal } from "../Modal/Modal";
-const initialtodo = [];
-const reducer = (prevTodos, action) => {
-  switch (action.type) {
-    case "ADD": {
-      return [...prevTodos, action.payload];
-    }
-    case "DELETE": {
-      return prevTodos.filter((todo) => todo.id == action.payload);
-    }
-    default:
-      return prevTodos;
-  }
-};
+import { v4 as uuid } from "uuid";
+
 export const MonthComponent = ({
   currentDate,
   selectedDate,
   dateForAddTask,
   setDateForAddTask,
+  todos,
+  addTodo,
+  deleteTodo,
+  inputRef,
+  onSelectDay: onSelectDayHandler,
 }) => {
-  const [todos, dispatch] = useReducer(reducer, initialtodo);
-  const inputRef = useRef("");
-  useEffect(() => {
-    console.log(todos);
-  }, [todos]);
   // ..................................
   const onOpenModalHandler = (date) => {
     setDateForAddTask(date);
   };
   // .....................................
-  const addTodo = () => {
-    dispatch({
-      type: "ADD",
-      payload: {
-        id: uuid(),
-        title: inputRef.current.value,
-        Date: dateForAddTask,
-      },
-    });
-    setDateForAddTask(undefined);
-  };
-
-  const deleteTodo = (todoId) => {
-    dispatch({
-      type: "DELETE",
-      payload: todoId,
-    });
-  };
 
   const dayOfWeek = [
     "Sunday",
@@ -84,6 +54,9 @@ export const MonthComponent = ({
                   key={uuid()}
                 >
                   <p
+                    onClick={() => {
+                      if (day != null) onSelectDayHandler(day);
+                    }}
                     className="h-8 w-8 flex justify-center items-center"
                     style={
                       day
