@@ -1,4 +1,4 @@
-import React, { useReducer, useRef } from "react";
+import React from "react";
 import { CloseIcon, DeleteIcon } from "../../../../assets/icons/Icon";
 import { v4 as uuid } from "uuid";
 
