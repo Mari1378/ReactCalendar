@@ -13,6 +13,7 @@ export const MonthComponent = ({
   deleteTodo,
   inputRef,
   onSelectDay: onSelectDayHandler,
+  Topic,
 }) => {
   // ..................................
   const onOpenModalHandler = (date) => {

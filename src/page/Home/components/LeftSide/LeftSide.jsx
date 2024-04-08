@@ -10,36 +10,14 @@ export const LeftSide = ({
   onGoToNextMonth: onGoToNextMonthHandler,
   onGoToPrevMonth: onGoToPrevMonthHandler,
   onSelectDay: onSelectDayHandler,
+  Topic,
+  onAddHandler,
+  onDeleteCategory,
+  value,
+  setValue,
+  color,
+  setColor,
 }) => {
-  const [Topic, setTopic] = useState([]);
-  const [value, setValue] = useState("");
-  const [color, setColor] = useState("#00FA6C");
-
-  // ........................................................
-  const onAddHandler = () => {
-    if (value) {
-      if (Topic.length <= 4) {
-        setTopic([
-          ...Topic,
-          {
-            title: value,
-            id: uuid(),
-            color: color,
-          },
-        ]);
-        setValue("");
-        setColor("#00FA6C");
-      }
-    }
-  };
-  // ..........................................................
-
-  const onDeleteCategory = (id) => {
-    const newTopic = Topic.filter((item) => {
-      return item.id !== id;
-    });
-    setTopic(newTopic);
-  };
   // ............................................................
   return (
     <div className="h-screen p-4 w-[350px] bg-black text-white overflow-auto">

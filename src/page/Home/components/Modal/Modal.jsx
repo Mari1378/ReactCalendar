@@ -28,12 +28,7 @@ export const Modal = ({ setDateForAddTask, addTodo, deleteTodo, inputRef }) => {
       </div>
       <div className="px-5 text-gray-700 text-lg mb-8">
         <p className="mb-6">Select the topic</p>
-        <div className="flex gap-2">
-          <div className="rounded-full w-8 h-8 bg-[#1c48ff]"></div>
-          <div className="rounded-full w-8 h-8 bg-[#1ba71b]"></div>
-          <div className="rounded-full w-8 h-8 bg-[#ee2727]"></div>
-          <div className="rounded-full w-8 h-8 bg-[#8b8b8f]"></div>
-        </div>
+        <div className="flex gap-2"></div>
       </div>
       <button
         onClick={addTodo}

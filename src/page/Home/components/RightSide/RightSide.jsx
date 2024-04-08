@@ -21,6 +21,7 @@ export const RightSide = ({
   currentDate,
   selectedDate,
   onSelectDay: onSelectDayHandler,
+  Topic,
 }) => {
   const [todos, dispatch] = useReducer(reducer, initialtodo);
   const inputRef = useRef("");
@@ -90,6 +91,7 @@ export const RightSide = ({
           deleteTodo={deleteTodo}
           inputRef={inputRef}
           onSelectDay={onSelectDayHandler}
+          Topic={Topic}
         />
       ) : (
         <DayComponent
