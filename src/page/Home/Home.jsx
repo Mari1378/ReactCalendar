@@ -6,7 +6,9 @@ import { v4 as uuid } from "uuid";
 export const Home = () => {
   const [currentDate, setCurentDate] = useState(dayjs(new Date()));
   const [selectedDate, setSelectedDate] = useState(dayjs(new Date()));
-  const [Topic, setTopic] = useState([]);
+  const [Topic, setTopic] = useState([
+    { title: "general", id: uuid(), color: "#ff00a6" },
+  ]);
   const [value, setValue] = useState("");
   const [color, setColor] = useState("#00FA6C");
   const onAddHandler = () => {
@@ -69,6 +71,7 @@ export const Home = () => {
         selectedDate={selectedDate}
         onSelectDay={onSelectDayHandler}
         Topic={Topic}
+        value={value}
       />
     </div>
   );

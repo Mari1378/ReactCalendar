@@ -10,7 +10,7 @@ const reducer = (prevTodos, action) => {
       return [...prevTodos, action.payload];
     }
     case "DELETE": {
-      return prevTodos.filter((todo) => todo.id == action.payload);
+      return prevTodos.filter((todo) => todo.id !== action.payload);
     }
     default:
       return prevTodos;
@@ -24,22 +24,27 @@ export const RightSide = ({
   Topic,
 }) => {
   const [todos, dispatch] = useReducer(reducer, initialtodo);
-  const inputRef = useRef("");
+  const [inputValue, setInputValue] = useState("");
   const [isMonth, setIsMonth] = useState(true);
   const [isDay, setIsDay] = useState(false);
   const [dateForAddTask, setDateForAddTask] = useState();
+  const [selectedCategory, setSelectedCategory] = useState(Topic[0]);
   // .................................
 
   const addTodo = () => {
-    dispatch({
-      type: "ADD",
-      payload: {
-        id: uuid(),
-        title: inputRef.current.value,
-        Date: dateForAddTask,
-      },
-    });
-    setDateForAddTask(undefined);
+    if (inputValue) {
+      dispatch({
+        type: "ADD",
+        payload: {
+          id: uuid(),
+          title: inputValue,
+          Date: dateForAddTask,
+          category: selectedCategory,
+        },
+      });
+      setDateForAddTask(undefined);
+      setInputValue("");
+    }
   };
 
   const deleteTodo = (todoId) => {
@@ -89,9 +94,12 @@ export const RightSide = ({
           todos={todos}
           addTodo={addTodo}
           deleteTodo={deleteTodo}
-          inputRef={inputRef}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
           onSelectDay={onSelectDayHandler}
           Topic={Topic}
+          setSelectedCategory={setSelectedCategory}
+          selectedCategory={selectedCategory}
         />
       ) : (
         <DayComponent

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { calenderCreator } from "../../../../utils/Date";
 import { Modal } from "../Modal/Modal";
 import { v4 as uuid } from "uuid";
@@ -11,14 +11,18 @@ export const MonthComponent = ({
   todos,
   addTodo,
   deleteTodo,
-  inputRef,
+  inputValue,
   onSelectDay: onSelectDayHandler,
   Topic,
+  setSelectedCategory,
+  selectedCategory,
+  setInputValue,
 }) => {
   // ..................................
   const onOpenModalHandler = (date) => {
     setDateForAddTask(date);
   };
+
   // .....................................
 
   const dayOfWeek = [
@@ -46,12 +50,12 @@ export const MonthComponent = ({
       </div>
       {calenderCreator(currentDate).map((weeks) => {
         return (
-          <div key={uuid()} className="flex h-full ">
+          <div key={uuid()} className="flex h-full">
             {weeks.map((day) => {
               return (
                 <div
                   onClick={() => onOpenModalHandler(day)}
-                  className="text-l cursor-pointer text-gray-900 font-thin border border-gray-200 w-full flex items-center p-2 flex-col "
+                  className="text-l cursor-pointer text-gray-900 font-thin border border-gray-200  w-full flex items-center p-1 flex-col "
                   key={uuid()}
                 >
                   <p
@@ -82,7 +86,17 @@ export const MonthComponent = ({
                         day?.format("DD/MM/YYYY")
                       )
                         return null;
-                      return <li key={todo.id}>{todo.title}</li>;
+                      return (
+                        <li key={todo.id} className="flex items-center gap-1">
+                          <div
+                            className="w-4 h-4 rounded-2xl"
+                            style={{
+                              backgroundColor: `${todo.category.color}`,
+                            }}
+                          ></div>
+                          <p>{todo.title}</p>
+                        </li>
+                      );
                     })}
                   </ul>
                 </div>
@@ -96,7 +110,11 @@ export const MonthComponent = ({
           setDateForAddTask={setDateForAddTask}
           addTodo={addTodo}
           deleteTodo={deleteTodo}
-          inputRef={inputRef}
+          inputValue={inputValue}
+          Topic={Topic}
+          setSelectedCategory={setSelectedCategory}
+          selectedCategory={selectedCategory}
+          setInputValue={setInputValue}
         />
       ) : null}
     </div>
