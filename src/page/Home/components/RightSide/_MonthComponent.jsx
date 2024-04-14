@@ -12,32 +12,19 @@ export const MonthComponent = ({
   addTodo,
   deleteTodo,
   inputValue,
-  onSelectDay: onSelectDayHandler,
   Topic,
   setSelectedCategory,
   selectedCategory,
   setInputValue,
-  editing,
-  setEditing,
   editTodo,
-  setChangeButton,
   changeButton,
+  onOpenModalHandler,
+  onOpenModalHandlerForEdit,
+  setStartTodo,
+  setendTodo,
 }) => {
   // ..................................
-  const onOpenModalHandler = (date) => {
-    setDateForAddTask(date);
-    if (date != null) onSelectDayHandler(date);
-    setChangeButton("ADD");
-  };
-  const onOpenModalHandlerForEdit = (date, id) => {
-    setDateForAddTask(date);
-    const findTodos = todos.find((item) => {
-      return item.id === id;
-    });
-    setInputValue(findTodos.title);
-    setEditing(findTodos);
-    setChangeButton("EDIT");
-  };
+
   // .....................................
 
   const dayOfWeek = [
@@ -100,9 +87,10 @@ export const MonthComponent = ({
                         return null;
                       return (
                         <li
-                          onClick={() =>
-                            onOpenModalHandlerForEdit(day, todo.id)
-                          }
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            onOpenModalHandlerForEdit(day, todo.id);
+                          }}
                           key={todo.id}
                           className="flex items-center gap-1"
                         >
@@ -135,7 +123,9 @@ export const MonthComponent = ({
           setInputValue={setInputValue}
           editTodo={editTodo}
           changeButton={changeButton}
-          id={todos.id}
+          dateForAddTask={dateForAddTask}
+          setStartTodo={setStartTodo}
+          setendTodo={setendTodo}
         />
       ) : null}
     </div>

@@ -1,7 +1,11 @@
 import React from "react";
 import { v4 as uuid } from "uuid";
 
-export const DayComponent = () => {
+export const DayComponent = ({
+  selectedDate,
+  onOpenModalHandler,
+  onOpenModalHandlerForEdit,
+}) => {
   const arrayOfTime = [
     "0:00",
     "1:00",
@@ -32,7 +36,11 @@ export const DayComponent = () => {
     <div>
       {arrayOfTime.map((time) => {
         return (
-          <div className="flex h-16" key={uuid()}>
+          <div
+            className="flex h-16 cursor-pointer"
+            key={uuid()}
+            onClick={() => onOpenModalHandler()}
+          >
             <p className="px-4 -mt-4 text-lg text-slate-700">{time}</p>
             <div className="border-t border-gray-200 grow"></div>
           </div>

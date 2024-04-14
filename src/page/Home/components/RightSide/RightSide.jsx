@@ -10,11 +10,15 @@ const reducer = (prevTodos, action) => {
       return [...prevTodos, action.payload];
     }
     case "DELETE": {
-      return prevTodos.filter((todo) => todo.id !== action.payload);
+      return prevTodos.filter(
+        (todo) =>
+          todo.Date.format("DD/MM/YYYY") !== action.payload.format("DD/MM/YYYY")
+      );
     }
     case "EDIT": {
       return prevTodos.map((todo) =>
-        todo.id === action.payload.id
+        todo.Date.format("DD/MM/YYYY") ===
+        action.payload.Date.format("DD/MM/YYYY")
           ? { ...todo, title: action.payload.title }
           : todo
       );
@@ -29,15 +33,16 @@ export const RightSide = ({
   selectedDate,
   onSelectDay: onSelectDayHandler,
   Topic,
+  setStartTodo,
+  setendTodo,
 }) => {
   const [todos, dispatch] = useReducer(reducer, initialtodo);
   const [inputValue, setInputValue] = useState("");
-  const [editing, setEditing] = useState({});
   const [isMonth, setIsMonth] = useState(true);
   const [isDay, setIsDay] = useState(false);
   const [dateForAddTask, setDateForAddTask] = useState();
   const [selectedCategory, setSelectedCategory] = useState(Topic[0]);
-  const [changeButton, setChangeButton] = useState("ADD");
+  const [changeButton, setChangeButton] = useState("EDIT");
   // .................................
 
   const addTodo = () => {
@@ -56,22 +61,42 @@ export const RightSide = ({
     }
   };
 
-  const deleteTodo = (todoId) => {
+  const deleteTodo = (dateTodo) => {
     dispatch({
       type: "DELETE",
-      payload: todoId,
+      payload: dateTodo,
     });
+    setDateForAddTask(undefined);
+    console.log(dateTodo);
   };
-  const editTodo = (editId) => {
+  const editTodo = (dateTodo) => {
     dispatch({
       type: "EDIT",
       payload: {
-        id: editId,
+        Date: dateTodo,
         title: inputValue,
       },
     });
+    setDateForAddTask(undefined);
   };
+  //
 
+  const onOpenModalHandler = (date) => {
+    setDateForAddTask(date);
+    if (date != null) onSelectDayHandler(date);
+    setChangeButton("ADD");
+
+    console.log("onOpenModalHandler");
+  };
+  const onOpenModalHandlerForEdit = (date, id) => {
+    setDateForAddTask(date);
+    const findTodos = todos.find((item) => {
+      return item.id === id;
+    });
+    setInputValue(findTodos.title);
+    setChangeButton("EDIT");
+    console.log("onOpenModalHandlerForEdit");
+  };
   // .................................
   const onMonthHandler = () => {
     setIsDay(false);
@@ -114,20 +139,21 @@ export const RightSide = ({
           deleteTodo={deleteTodo}
           inputValue={inputValue}
           setInputValue={setInputValue}
-          onSelectDay={onSelectDayHandler}
           Topic={Topic}
           setSelectedCategory={setSelectedCategory}
           selectedCategory={selectedCategory}
-          editing={editing}
-          setEditing={setEditing}
           editTodo={editTodo}
-          setChangeButton={setChangeButton}
           changeButton={changeButton}
+          onOpenModalHandler={onOpenModalHandler}
+          onOpenModalHandlerForEdit={onOpenModalHandlerForEdit}
+          setStartTodo={setStartTodo}
+          setendTodo={setendTodo}
         />
       ) : (
         <DayComponent
-          dateForAddTask={dateForAddTask}
-          setDateForAddTask={setDateForAddTask}
+          onOpenModalHandler={onOpenModalHandler}
+          onOpenModalHandlerForEdit={onOpenModalHandlerForEdit}
+          selectedDate={selectedDate}
         />
       )}
     </div>

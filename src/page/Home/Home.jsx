@@ -11,6 +11,8 @@ export const Home = () => {
   ]);
   const [value, setValue] = useState("");
   const [color, setColor] = useState("#00FA6C");
+  const [startTodo, setStartTodo] = useState(value);
+  const [endTodo, setendTodo] = useState(value);
   const onAddHandler = () => {
     if (value) {
       if (Topic.length <= 4) {
@@ -72,6 +74,8 @@ export const Home = () => {
         onSelectDay={onSelectDayHandler}
         Topic={Topic}
         value={value}
+        setStartTodo={setStartTodo}
+        setendTodo={setendTodo}
       />
     </div>
   );

@@ -15,7 +15,7 @@ export const Category = ({ title, color, onDeleteCategory, id }) => {
         <button
           className="text-2xl"
           onClick={() => {
-            onDeleteCategory(id);
+            if (title !== "general") onDeleteCategory(id);
           }}
         >
           <DeleteIcon />
