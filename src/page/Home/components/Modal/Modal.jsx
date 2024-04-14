@@ -1,6 +1,5 @@
 import React from "react";
 import { CloseIcon, DeleteIcon, Minus } from "../../../../assets/icons/Icon";
-import { v4 as uuid } from "uuid";
 
 export const Modal = ({
   setDateForAddTask,
