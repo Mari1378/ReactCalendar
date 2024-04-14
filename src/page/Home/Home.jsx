@@ -76,6 +76,8 @@ export const Home = () => {
         value={value}
         setStartTodo={setStartTodo}
         setendTodo={setendTodo}
+        startTodo={startTodo}
+        endTodo={endTodo}
       />
     </div>
   );

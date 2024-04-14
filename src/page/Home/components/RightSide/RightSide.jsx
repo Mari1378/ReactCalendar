@@ -35,6 +35,8 @@ export const RightSide = ({
   Topic,
   setStartTodo,
   setendTodo,
+  startTodo,
+  endTodo,
 }) => {
   const [todos, dispatch] = useReducer(reducer, initialtodo);
   const [inputValue, setInputValue] = useState("");
@@ -54,6 +56,8 @@ export const RightSide = ({
           title: inputValue,
           Date: dateForAddTask,
           category: selectedCategory,
+          startTime: startTodo,
+          endTime: endTodo,
         },
       });
       setDateForAddTask(undefined);
@@ -67,7 +71,6 @@ export const RightSide = ({
       payload: dateTodo,
     });
     setDateForAddTask(undefined);
-    console.log(dateTodo);
   };
   const editTodo = (dateTodo) => {
     dispatch({
@@ -85,8 +88,6 @@ export const RightSide = ({
     setDateForAddTask(date);
     if (date != null) onSelectDayHandler(date);
     setChangeButton("ADD");
-
-    console.log("onOpenModalHandler");
   };
   const onOpenModalHandlerForEdit = (date, id) => {
     setDateForAddTask(date);
@@ -95,7 +96,6 @@ export const RightSide = ({
     });
     setInputValue(findTodos.title);
     setChangeButton("EDIT");
-    console.log("onOpenModalHandlerForEdit");
   };
   // .................................
   const onMonthHandler = () => {
