@@ -17,12 +17,27 @@ export const MonthComponent = ({
   setSelectedCategory,
   selectedCategory,
   setInputValue,
+  editing,
+  setEditing,
+  editTodo,
+  setChangeButton,
+  changeButton,
 }) => {
   // ..................................
   const onOpenModalHandler = (date) => {
     setDateForAddTask(date);
+    if (date != null) onSelectDayHandler(date);
+    setChangeButton("ADD");
   };
-
+  const onOpenModalHandlerForEdit = (date, id) => {
+    setDateForAddTask(date);
+    const findTodos = todos.find((item) => {
+      return item.id === id;
+    });
+    setInputValue(findTodos.title);
+    setEditing(findTodos);
+    setChangeButton("EDIT");
+  };
   // .....................................
 
   const dayOfWeek = [
@@ -59,9 +74,6 @@ export const MonthComponent = ({
                   key={uuid()}
                 >
                   <p
-                    onClick={() => {
-                      if (day != null) onSelectDayHandler(day);
-                    }}
                     className="h-8 w-8 flex justify-center items-center"
                     style={
                       day
@@ -87,7 +99,13 @@ export const MonthComponent = ({
                       )
                         return null;
                       return (
-                        <li key={todo.id} className="flex items-center gap-1">
+                        <li
+                          onClick={() =>
+                            onOpenModalHandlerForEdit(day, todo.id)
+                          }
+                          key={todo.id}
+                          className="flex items-center gap-1"
+                        >
                           <div
                             className="w-4 h-4 rounded-2xl"
                             style={{
@@ -115,6 +133,9 @@ export const MonthComponent = ({
           setSelectedCategory={setSelectedCategory}
           selectedCategory={selectedCategory}
           setInputValue={setInputValue}
+          editTodo={editTodo}
+          changeButton={changeButton}
+          id={todos.id}
         />
       ) : null}
     </div>

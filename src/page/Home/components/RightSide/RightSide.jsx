@@ -12,6 +12,13 @@ const reducer = (prevTodos, action) => {
     case "DELETE": {
       return prevTodos.filter((todo) => todo.id !== action.payload);
     }
+    case "EDIT": {
+      return prevTodos.map((todo) =>
+        todo.id === action.payload.id
+          ? { ...todo, title: action.payload.title }
+          : todo
+      );
+    }
     default:
       return prevTodos;
   }
@@ -25,10 +32,12 @@ export const RightSide = ({
 }) => {
   const [todos, dispatch] = useReducer(reducer, initialtodo);
   const [inputValue, setInputValue] = useState("");
+  const [editing, setEditing] = useState({});
   const [isMonth, setIsMonth] = useState(true);
   const [isDay, setIsDay] = useState(false);
   const [dateForAddTask, setDateForAddTask] = useState();
   const [selectedCategory, setSelectedCategory] = useState(Topic[0]);
+  const [changeButton, setChangeButton] = useState("ADD");
   // .................................
 
   const addTodo = () => {
@@ -51,6 +60,15 @@ export const RightSide = ({
     dispatch({
       type: "DELETE",
       payload: todoId,
+    });
+  };
+  const editTodo = (editId) => {
+    dispatch({
+      type: "EDIT",
+      payload: {
+        id: editId,
+        title: inputValue,
+      },
     });
   };
 
@@ -100,6 +118,11 @@ export const RightSide = ({
           Topic={Topic}
           setSelectedCategory={setSelectedCategory}
           selectedCategory={selectedCategory}
+          editing={editing}
+          setEditing={setEditing}
+          editTodo={editTodo}
+          setChangeButton={setChangeButton}
+          changeButton={changeButton}
         />
       ) : (
         <DayComponent

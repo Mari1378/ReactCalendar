@@ -11,6 +11,9 @@ export const Modal = ({
   setSelectedCategory,
   selectedCategory,
   setInputValue,
+  editTodo,
+  changeButton,
+  id,
 }) => {
   // ........................................
   const onCloseModalHandler = () => {
@@ -65,7 +68,7 @@ export const Modal = ({
         </div>
       </div>
       <button
-        onClick={addTodo}
+        onClick={changeButton === "ADD" ? addTodo : () => editTodo(id)}
         className="ml-52 bg-[#94a3b8] px-3 py-2 w-24 text-[18px] text-white rounded"
       >
         Save
