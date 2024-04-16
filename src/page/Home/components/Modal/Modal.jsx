@@ -15,6 +15,8 @@ export const Modal = ({
   dateForAddTask,
   setStartTodo,
   setendTodo,
+  startTodo,
+  endTodo,
 }) => {
   // ........................................
   const onCloseModalHandler = () => {
@@ -72,14 +74,16 @@ export const Modal = ({
         <input
           type="time"
           step="3600"
-          value="05:00"
+          // value={startTodo}
+          name="time"
           onChange={(e) => setStartTodo(e.target.value)}
         />
         <Minus />
         <input
           type="time"
           step="3600"
-          value="06:00"
+          // value={endTodo}
+          name="time"
           onChange={(e) => setendTodo(e.target.value)}
         />
       </div>

@@ -22,6 +22,8 @@ export const MonthComponent = ({
   onOpenModalHandlerForEdit,
   setStartTodo,
   setendTodo,
+  startTodo,
+  endTodo,
 }) => {
   // ..................................
 
@@ -126,6 +128,8 @@ export const MonthComponent = ({
           dateForAddTask={dateForAddTask}
           setStartTodo={setStartTodo}
           setendTodo={setendTodo}
+          startTodo={startTodo}
+          endTodo={endTodo}
         />
       ) : null}
     </div>

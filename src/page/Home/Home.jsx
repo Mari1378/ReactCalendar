@@ -11,8 +11,8 @@ export const Home = () => {
   ]);
   const [value, setValue] = useState("");
   const [color, setColor] = useState("#00FA6C");
-  const [startTodo, setStartTodo] = useState(value);
-  const [endTodo, setendTodo] = useState(value);
+  const [startTodo, setStartTodo] = useState();
+  const [endTodo, setendTodo] = useState();
   const onAddHandler = () => {
     if (value) {
       if (Topic.length <= 4) {

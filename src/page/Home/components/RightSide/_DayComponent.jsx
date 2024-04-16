@@ -2,10 +2,16 @@ import React from "react";
 import { v4 as uuid } from "uuid";
 
 export const DayComponent = ({
-  selectedDate,
   onOpenModalHandler,
   onOpenModalHandlerForEdit,
+  todos,
+  dateForAddTask,
+  dayOfMonth,
 }) => {
+  const todoOnDay = todos.find((todo) => {
+    return todo.Date.format("DD/MM/YYYY") === dayOfMonth.format("DD/MM/YYYY");
+  });
+  console.log(todoOnDay);
   const arrayOfTime = [
     "0:00",
     "1:00",
@@ -36,13 +42,21 @@ export const DayComponent = ({
     <div>
       {arrayOfTime.map((time) => {
         return (
-          <div
-            className="flex h-16 cursor-pointer"
-            key={uuid()}
-            onClick={() => onOpenModalHandler()}
-          >
+          <div className="flex h-16 cursor-pointer" key={uuid()}>
             <p className="px-4 -mt-4 text-lg text-slate-700">{time}</p>
-            <div className="border-t border-gray-200 grow"></div>
+            <div className="border-t border-gray-200 grow p-2">
+              {todoOnDay.startTime === time ? (
+                <div className="flex items-center gap-1">
+                  <div
+                    className="w-4 h-4 rounded-2xl"
+                    style={{
+                      backgroundColor: `${todoOnDay.category.color}`,
+                    }}
+                  ></div>
+                  <p>{todoOnDay.title}</p>
+                </div>
+              ) : null}
+            </div>
           </div>
         );
       })}

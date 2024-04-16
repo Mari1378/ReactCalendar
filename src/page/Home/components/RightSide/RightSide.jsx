@@ -41,7 +41,7 @@ export const RightSide = ({
   const [todos, dispatch] = useReducer(reducer, initialtodo);
   const [inputValue, setInputValue] = useState("");
   const [isMonth, setIsMonth] = useState(true);
-  const [isDay, setIsDay] = useState(false);
+  const [dayOfMonth, setDayOfMonth] = useState([]);
   const [dateForAddTask, setDateForAddTask] = useState();
   const [selectedCategory, setSelectedCategory] = useState(Topic[0]);
   const [changeButton, setChangeButton] = useState("EDIT");
@@ -88,6 +88,8 @@ export const RightSide = ({
     setDateForAddTask(date);
     if (date != null) onSelectDayHandler(date);
     setChangeButton("ADD");
+    console.log(startTodo);
+    console.log(endTodo);
   };
   const onOpenModalHandlerForEdit = (date, id) => {
     setDateForAddTask(date);
@@ -99,12 +101,11 @@ export const RightSide = ({
   };
   // .................................
   const onMonthHandler = () => {
-    setIsDay(false);
     setIsMonth(true);
   };
-  const onDayHandler = () => {
+  const onDayHandler = (date) => {
     setIsMonth(false);
-    setIsDay(true);
+    setDayOfMonth(date);
   };
   return (
     <div className="w-full h-screen flex flex-col overflow-auto ">
@@ -113,6 +114,11 @@ export const RightSide = ({
         onClick={onTodayHandler}
       >
         <button className="bg-slate-100 text-xl h-12 py-2 px-4">Today</button>
+        <h2 className="text-xl text-gray-500 font-bold">
+          {" "}
+          {selectedDate.format("MMMM")} {selectedDate.format("DD")} ,{" "}
+          {selectedDate.format("YYYY")}
+        </h2>
         <div className="flex gap-0.5">
           <button
             onClick={onMonthHandler}
@@ -121,7 +127,7 @@ export const RightSide = ({
             Month
           </button>
           <button
-            onClick={onDayHandler}
+            onClick={() => onDayHandler(selectedDate)}
             className="border border-gray-200 rounded-r-lg px-5 py-1"
           >
             Day
@@ -148,12 +154,16 @@ export const RightSide = ({
           onOpenModalHandlerForEdit={onOpenModalHandlerForEdit}
           setStartTodo={setStartTodo}
           setendTodo={setendTodo}
+          startTodo={startTodo}
+          endTodo={endTodo}
         />
       ) : (
         <DayComponent
           onOpenModalHandler={onOpenModalHandler}
           onOpenModalHandlerForEdit={onOpenModalHandlerForEdit}
-          selectedDate={selectedDate}
+          todos={todos}
+          dateForAddTask={dateForAddTask}
+          dayOfMonth={dayOfMonth}
         />
       )}
     </div>
