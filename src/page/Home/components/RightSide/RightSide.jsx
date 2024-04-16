@@ -88,8 +88,6 @@ export const RightSide = ({
     setDateForAddTask(date);
     if (date != null) onSelectDayHandler(date);
     setChangeButton("ADD");
-    console.log(startTodo);
-    console.log(endTodo);
   };
   const onOpenModalHandlerForEdit = (date, id) => {
     setDateForAddTask(date);

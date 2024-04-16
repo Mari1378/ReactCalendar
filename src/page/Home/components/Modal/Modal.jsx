@@ -73,7 +73,7 @@ export const Modal = ({
       <div className="px-5 flex text-lg items-center gap-2 mb-4">
         <input
           type="time"
-          step="3600"
+          // step="3600"
           // value={startTodo}
           name="time"
           onChange={(e) => setStartTodo(e.target.value)}
@@ -81,7 +81,7 @@ export const Modal = ({
         <Minus />
         <input
           type="time"
-          step="3600"
+          // step="3600"
           // value={endTodo}
           name="time"
           onChange={(e) => setendTodo(e.target.value)}

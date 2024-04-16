@@ -30,3 +30,9 @@ function createCalendarWithMonthAndYear(month, year) {
   });
   return listOfDay.filter((week) => !week.every((item) => item === null));
 }
+export function difrenceBetweenTwoTime(date, start, end) {
+  const startTime = dayjs(`${date.format("YYYY-MM-DD")} ${start}`);
+  const endTime = dayjs(`${date.format("YYYY-MM-DD")} ${end}`);
+  const mins = endTime.diff(startTime, "minutes", true);
+  return mins;
+}
