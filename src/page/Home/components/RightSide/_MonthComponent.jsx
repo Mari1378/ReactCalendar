@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { calenderCreator } from "../../../../utils/Date";
 import { Modal } from "../Modal/Modal";
 import { v4 as uuid } from "uuid";
