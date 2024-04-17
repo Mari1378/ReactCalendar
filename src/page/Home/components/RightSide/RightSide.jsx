@@ -81,6 +81,7 @@ export const RightSide = ({
       },
     });
     setDateForAddTask(undefined);
+    setInputValue("");
   };
   //
 
@@ -88,6 +89,7 @@ export const RightSide = ({
     setDateForAddTask(date);
     if (date != null) onSelectDayHandler(date);
     setChangeButton("ADD");
+    console.log(date);
   };
   const onOpenModalHandlerForEdit = (date, id) => {
     setDateForAddTask(date);
@@ -162,6 +164,21 @@ export const RightSide = ({
           todos={todos}
           dateForAddTask={dateForAddTask}
           dayOfMonth={dayOfMonth}
+          selectedDate={selectedDate}
+          setDateForAddTask={setDateForAddTask}
+          addTodo={addTodo}
+          deleteTodo={deleteTodo}
+          inputValue={inputValue}
+          Topic={Topic}
+          setSelectedCategory={setSelectedCategory}
+          selectedCategory={selectedCategory}
+          setInputValue={setInputValue}
+          editTodo={editTodo}
+          changeButton={changeButton}
+          setStartTodo={setStartTodo}
+          setendTodo={setendTodo}
+          startTodo={startTodo}
+          endTodo={endTodo}
         />
       )}
     </div>
