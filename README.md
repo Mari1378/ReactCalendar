@@ -1,9 +1,7 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-  https://amirfamili.github.io/calendar-app/
+1.dorost kardan moshkelat sakhtari prozhe (ta jome shab{31})
+2.anjam task hay baghi mande (shanbe shab{1})
+3.debug przohe (do shanbe shab {3})
+4.bordan prozhe roy typescript (ta 10 ordibehesht)
+5. ersal resume bray sherkat ha (12)
+5.ezafe kardan redux ya zustand ya hardo (dar farayande mosahebe bad az moror soal hay mosahebe)
+6.ertbat ba backend (bad az etmam redux)
