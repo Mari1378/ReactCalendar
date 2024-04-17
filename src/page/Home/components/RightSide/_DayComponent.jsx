@@ -1,6 +1,7 @@
 import React from "react";
 import { v4 as uuid } from "uuid";
 import { difrenceBetweenTwoTime } from "../../../../utils/Date";
+import { Modal } from "../Modal/Modal";
 
 export const DayComponent = ({
   onOpenModalHandler,
@@ -8,6 +9,21 @@ export const DayComponent = ({
   todos,
   dateForAddTask,
   dayOfMonth,
+  selectedDate,
+  setDateForAddTask,
+  addTodo,
+  deleteTodo,
+  inputValue,
+  Topic,
+  setSelectedCategory,
+  selectedCategory,
+  setInputValue,
+  editTodo,
+  changeButton,
+  setStartTodo,
+  setendTodo,
+  startTodo,
+  endTodo,
 }) => {
   const todosOnDay = todos.filter((todo) => {
     return todo.Date.format("DD/MM/YYYY") === dayOfMonth.format("DD/MM/YYYY");
@@ -39,14 +55,20 @@ export const DayComponent = ({
     "22:00",
     "23:00",
   ];
-
+  const onOpenModalHandlerinDay = (selectedDate) => {
+    onOpenModalHandler(selectedDate);
+    console.log(selectedDate);
+  };
   return (
     <div className="relative">
       {arrayOfTime.map((time) => {
         return (
-          <div className="flex h-[60px] cursor-pointer relative" key={uuid()} onClick={}>
+          <div
+            className="flex h-[60px] cursor-pointer relative"
+            key={uuid()}
+            onClick={() => onOpenModalHandlerinDay(selectedDate)}
+          >
             <p className="px-4 -mt-4 text-lg text-slate-700">{time}</p>
-
             <div className="border-t border-gray-200 grow h-full"></div>
           </div>
         );
@@ -72,6 +94,25 @@ export const DayComponent = ({
           </div>
         );
       })}
+      {dateForAddTask ? (
+        <Modal
+          setDateForAddTask={setDateForAddTask}
+          addTodo={addTodo}
+          deleteTodo={deleteTodo}
+          inputValue={inputValue}
+          Topic={Topic}
+          setSelectedCategory={setSelectedCategory}
+          selectedCategory={selectedCategory}
+          setInputValue={setInputValue}
+          editTodo={editTodo}
+          changeButton={changeButton}
+          dateForAddTask={dateForAddTask}
+          setStartTodo={setStartTodo}
+          setendTodo={setendTodo}
+          startTodo={startTodo}
+          endTodo={endTodo}
+        />
+      ) : null}
     </div>
   );
 };
