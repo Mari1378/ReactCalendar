@@ -1,3 +1,3 @@
 export { LeftSide } from "./LeftSide/LeftSide";
 export { RightSide } from "./RightSide/RightSide";
-export { Modal } from "./Modal/Modal";
+export { Modal } from "./RightSide/Modal/Modal";

@@ -1,29 +1,13 @@
 import React from "react";
 import { calenderCreator } from "../../../../utils/Date";
-import { Modal } from "../Modal/Modal";
 import { v4 as uuid } from "uuid";
 
 export const MonthComponent = ({
   currentDate,
   selectedDate,
-  dateForAddTask,
-  setDateForAddTask,
   todos,
-  addTodo,
-  deleteTodo,
-  inputValue,
-  Topic,
-  setSelectedCategory,
-  selectedCategory,
-  setInputValue,
-  editTodo,
-  changeButton,
   onOpenModalHandler,
   onOpenModalHandlerForEdit,
-  setStartTodo,
-  setendTodo,
-  startTodo,
-  endTodo,
 }) => {
   // ..................................
 
@@ -113,25 +97,6 @@ export const MonthComponent = ({
           </div>
         );
       })}
-      {dateForAddTask ? (
-        <Modal
-          setDateForAddTask={setDateForAddTask}
-          addTodo={addTodo}
-          deleteTodo={deleteTodo}
-          inputValue={inputValue}
-          Topic={Topic}
-          setSelectedCategory={setSelectedCategory}
-          selectedCategory={selectedCategory}
-          setInputValue={setInputValue}
-          editTodo={editTodo}
-          changeButton={changeButton}
-          dateForAddTask={dateForAddTask}
-          setStartTodo={setStartTodo}
-          setendTodo={setendTodo}
-          startTodo={startTodo}
-          endTodo={endTodo}
-        />
-      ) : null}
     </div>
   );
 };

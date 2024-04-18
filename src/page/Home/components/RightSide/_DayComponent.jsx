@@ -1,32 +1,10 @@
 import React from "react";
 import { v4 as uuid } from "uuid";
 import { difrenceBetweenTwoTime } from "../../../../utils/Date";
-import { Modal } from "../Modal/Modal";
 
-export const DayComponent = ({
-  onOpenModalHandler,
-  onOpenModalHandlerForEdit,
-  todos,
-  dateForAddTask,
-  dayOfMonth,
-  selectedDate,
-  setDateForAddTask,
-  addTodo,
-  deleteTodo,
-  inputValue,
-  Topic,
-  setSelectedCategory,
-  selectedCategory,
-  setInputValue,
-  editTodo,
-  changeButton,
-  setStartTodo,
-  setendTodo,
-  startTodo,
-  endTodo,
-}) => {
+export const DayComponent = ({ onOpenModalHandler, todos, selectedDate }) => {
   const todosOnDay = todos.filter((todo) => {
-    return todo.Date.format("DD/MM/YYYY") === dayOfMonth.format("DD/MM/YYYY");
+    return todo.Date.format("DD/MM/YYYY") === selectedDate.format("DD/MM/YYYY");
   });
   console.log(todosOnDay, "todo");
   const arrayOfTime = [
@@ -94,25 +72,6 @@ export const DayComponent = ({
           </div>
         );
       })}
-      {dateForAddTask ? (
-        <Modal
-          setDateForAddTask={setDateForAddTask}
-          addTodo={addTodo}
-          deleteTodo={deleteTodo}
-          inputValue={inputValue}
-          Topic={Topic}
-          setSelectedCategory={setSelectedCategory}
-          selectedCategory={selectedCategory}
-          setInputValue={setInputValue}
-          editTodo={editTodo}
-          changeButton={changeButton}
-          dateForAddTask={dateForAddTask}
-          setStartTodo={setStartTodo}
-          setendTodo={setendTodo}
-          startTodo={startTodo}
-          endTodo={endTodo}
-        />
-      ) : null}
     </div>
   );
 };

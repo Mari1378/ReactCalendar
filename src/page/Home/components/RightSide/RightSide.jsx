@@ -2,6 +2,7 @@ import React, { useReducer, useRef, useState } from "react";
 import { MonthComponent } from "./_MonthComponent";
 import { DayComponent } from "./_DayComponent";
 import { v4 as uuid } from "uuid";
+import { Modal } from "./Modal/Modal";
 
 const initialtodo = [];
 const reducer = (prevTodos, action) => {
@@ -33,35 +34,28 @@ export const RightSide = ({
   selectedDate,
   onSelectDay: onSelectDayHandler,
   Topic,
-  setStartTodo,
-  setendTodo,
-  startTodo,
-  endTodo,
+  setSelectedDate,
 }) => {
   const [todos, dispatch] = useReducer(reducer, initialtodo);
-  const [inputValue, setInputValue] = useState("");
   const [isMonth, setIsMonth] = useState(true);
-  const [dayOfMonth, setDayOfMonth] = useState([]);
   const [dateForAddTask, setDateForAddTask] = useState();
-  const [selectedCategory, setSelectedCategory] = useState(Topic[0]);
-  const [changeButton, setChangeButton] = useState("EDIT");
+  const [titleOfTaskForEdit, setTitleOfTaskForEdit] = useState("");
   // .................................
 
-  const addTodo = () => {
-    if (inputValue) {
+  const addTodo = (startTodo, endTodo, taskTitle, category) => {
+    if (taskTitle) {
       dispatch({
         type: "ADD",
         payload: {
           id: uuid(),
-          title: inputValue,
+          title: taskTitle,
           Date: dateForAddTask,
-          category: selectedCategory,
+          category: category,
           startTime: startTodo,
           endTime: endTodo,
         },
       });
       setDateForAddTask(undefined);
-      setInputValue("");
     }
   };
 
@@ -72,23 +66,21 @@ export const RightSide = ({
     });
     setDateForAddTask(undefined);
   };
-  const editTodo = (dateTodo) => {
+  const editTodo = (dateTodo, taskTitle) => {
     dispatch({
       type: "EDIT",
       payload: {
         Date: dateTodo,
-        title: inputValue,
+        title: taskTitle,
       },
     });
     setDateForAddTask(undefined);
-    setInputValue("");
   };
   //
 
-  const onOpenModalHandler = (date) => {
+  const onOpenModalHandler = (date, id) => {
     setDateForAddTask(date);
     if (date != null) onSelectDayHandler(date);
-    setChangeButton("ADD");
     console.log(date);
   };
   const onOpenModalHandlerForEdit = (date, id) => {
@@ -96,8 +88,7 @@ export const RightSide = ({
     const findTodos = todos.find((item) => {
       return item.id === id;
     });
-    setInputValue(findTodos.title);
-    setChangeButton("EDIT");
+    setTitleOfTaskForEdit(findTodos.title);
   };
   // .................................
   const onMonthHandler = () => {
@@ -105,7 +96,7 @@ export const RightSide = ({
   };
   const onDayHandler = (date) => {
     setIsMonth(false);
-    setDayOfMonth(date);
+    setSelectedDate(date);
   };
   return (
     <div className="w-full h-screen flex flex-col overflow-auto ">
@@ -136,51 +127,31 @@ export const RightSide = ({
       </div>
       {isMonth ? (
         <MonthComponent
-          dateForAddTask={dateForAddTask}
-          setDateForAddTask={setDateForAddTask}
           currentDate={currentDate}
           selectedDate={selectedDate}
           todos={todos}
-          addTodo={addTodo}
-          deleteTodo={deleteTodo}
-          inputValue={inputValue}
-          setInputValue={setInputValue}
-          Topic={Topic}
-          setSelectedCategory={setSelectedCategory}
-          selectedCategory={selectedCategory}
-          editTodo={editTodo}
-          changeButton={changeButton}
           onOpenModalHandler={onOpenModalHandler}
           onOpenModalHandlerForEdit={onOpenModalHandlerForEdit}
-          setStartTodo={setStartTodo}
-          setendTodo={setendTodo}
-          startTodo={startTodo}
-          endTodo={endTodo}
         />
       ) : (
         <DayComponent
           onOpenModalHandler={onOpenModalHandler}
           onOpenModalHandlerForEdit={onOpenModalHandlerForEdit}
           todos={todos}
-          dateForAddTask={dateForAddTask}
-          dayOfMonth={dayOfMonth}
           selectedDate={selectedDate}
+        />
+      )}
+      {dateForAddTask ? (
+        <Modal
           setDateForAddTask={setDateForAddTask}
           addTodo={addTodo}
           deleteTodo={deleteTodo}
-          inputValue={inputValue}
           Topic={Topic}
-          setSelectedCategory={setSelectedCategory}
-          selectedCategory={selectedCategory}
-          setInputValue={setInputValue}
           editTodo={editTodo}
-          changeButton={changeButton}
-          setStartTodo={setStartTodo}
-          setendTodo={setendTodo}
-          startTodo={startTodo}
-          endTodo={endTodo}
+          dateForAddTask={dateForAddTask}
+          defaultInputValue={titleOfTaskForEdit ? titleOfTaskForEdit : ""}
         />
-      )}
+      ) : null}
     </div>
   );
 };

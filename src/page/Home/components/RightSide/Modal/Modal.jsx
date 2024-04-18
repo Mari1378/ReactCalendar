@@ -1,23 +1,19 @@
-import React from "react";
-import { CloseIcon, DeleteIcon, Minus } from "../../../../assets/icons/Icon";
+import React, { useState } from "react";
+import { CloseIcon, DeleteIcon, Minus } from "../../../../../assets/icons/Icon";
 
 export const Modal = ({
   setDateForAddTask,
   addTodo,
   deleteTodo,
-  inputValue,
   Topic,
-  setSelectedCategory,
-  selectedCategory,
-  setInputValue,
   editTodo,
-  changeButton,
   dateForAddTask,
-  setStartTodo,
-  setendTodo,
-  startTodo,
-  endTodo,
+  defaultInputValue,
 }) => {
+  const [startTodo, setStartTodo] = useState("8:00");
+  const [endTodo, setendTodo] = useState("9:00");
+  const [inputValue, setInputValue] = useState(defaultInputValue);
+  const [selectedCategory, setSelectedCategory] = useState(Topic[0]);
   // ........................................
   const onCloseModalHandler = () => {
     setDateForAddTask(undefined);
@@ -89,11 +85,19 @@ export const Modal = ({
       </div>
       <button
         onClick={
-          changeButton === "ADD" ? addTodo : () => editTodo(dateForAddTask)
+          !defaultInputValue
+            ? () => {
+                addTodo(startTodo, endTodo, inputValue, selectedCategory);
+                setInputValue("");
+              }
+            : () => {
+                editTodo(dateForAddTask, inputValue);
+                setInputValue("");
+              }
         }
         className="ml-52 bg-[#94a3b8] px-3 py-2 w-24 text-[18px] text-white rounded"
       >
-        {changeButton === "ADD" ? "Add" : "Edit"}
+        {!defaultInputValue ? "Add" : "Edit"}
       </button>
     </div>
   );

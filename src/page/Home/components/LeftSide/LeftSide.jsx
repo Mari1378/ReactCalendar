@@ -13,11 +13,9 @@ export const LeftSide = ({
   Topic,
   onAddHandler,
   onDeleteCategory,
-  value,
-  setValue,
-  color,
-  setColor,
 }) => {
+  const [value, setValue] = useState("");
+  const [color, setColor] = useState("#00FA6C");
   // ............................................................
   return (
     <div className="h-screen p-4 w-[350px] bg-black text-white overflow-auto">
@@ -103,7 +101,11 @@ export const LeftSide = ({
           <span className="text-red-600">You can have 5 categories</span>
         ) : null}
         <button
-          onClick={onAddHandler}
+          onClick={() => {
+            onAddHandler(value, color);
+            setValue("");
+            setColor("#00FA6C");
+          }}
           className="bg-gray-400 rounded mb-8 px-2 h-8 text-gray-900 w-full"
         >
           Add Category

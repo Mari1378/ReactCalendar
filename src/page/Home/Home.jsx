@@ -9,11 +9,8 @@ export const Home = () => {
   const [Topic, setTopic] = useState([
     { title: "general", id: uuid(), color: "#ff00a6" },
   ]);
-  const [value, setValue] = useState("");
-  const [color, setColor] = useState("#00FA6C");
-  const [startTodo, setStartTodo] = useState("8:00");
-  const [endTodo, setendTodo] = useState("9:00");
-  const onAddHandler = () => {
+
+  const onAddHandler = (value, color) => {
     if (value) {
       if (Topic.length <= 4) {
         setTopic([
@@ -24,8 +21,6 @@ export const Home = () => {
             color: color,
           },
         ]);
-        setValue("");
-        setColor("#00FA6C");
       }
     }
   };
@@ -62,10 +57,6 @@ export const Home = () => {
         Topic={Topic}
         onAddHandler={onAddHandler}
         onDeleteCategory={onDeleteCategory}
-        value={value}
-        setValue={setValue}
-        color={color}
-        setColor={setColor}
       />
       <RightSide
         currentDate={currentDate}
@@ -73,11 +64,7 @@ export const Home = () => {
         selectedDate={selectedDate}
         onSelectDay={onSelectDayHandler}
         Topic={Topic}
-        value={value}
-        setStartTodo={setStartTodo}
-        setendTodo={setendTodo}
-        startTodo={startTodo}
-        endTodo={endTodo}
+        setSelectedDate={setSelectedDate}
       />
     </div>
   );
