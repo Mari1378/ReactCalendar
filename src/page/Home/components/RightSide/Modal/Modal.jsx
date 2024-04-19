@@ -3,10 +3,10 @@ import { CloseIcon, DeleteIcon, Minus } from "../../../../../assets/icons/Icon";
 
 export const Modal = ({
   setDateForAddTask,
-  addTodo,
-  deleteTodo,
+  addTodo: addTodoHandler,
+  deleteTodo: deleteTodoHandler,
+  editTodo: editTodoHandler,
   Topic,
-  editTodo,
   dateForAddTask,
   defaultInputValue,
 }) => {
@@ -24,7 +24,7 @@ export const Modal = ({
       <div className="flex justify-between items-center w-full bg-gray-100 h-12 text-2xl text-gray-500">
         <button
           onClick={() => {
-            deleteTodo(dateForAddTask);
+            deleteTodoHandler(dateForAddTask);
           }}
           className="px-4 py-2"
         >
@@ -87,11 +87,16 @@ export const Modal = ({
         onClick={
           !defaultInputValue
             ? () => {
-                addTodo(startTodo, endTodo, inputValue, selectedCategory);
+                addTodoHandler(
+                  startTodo,
+                  endTodo,
+                  inputValue,
+                  selectedCategory
+                );
                 setInputValue("");
               }
             : () => {
-                editTodo(dateForAddTask, inputValue);
+                editTodoHandler(dateForAddTask, inputValue);
                 setInputValue("");
               }
         }

@@ -4,6 +4,7 @@ import { v4 as uuid } from "uuid";
 import { daysOfWeek } from "../../../../constants/Date";
 import { useState } from "react";
 import { Category } from "./Category";
+import { MakeWeek } from "./MakeWeek";
 export const LeftSide = ({
   currentDate,
   selectedDate,
@@ -11,7 +12,7 @@ export const LeftSide = ({
   onGoToPrevMonth: onGoToPrevMonthHandler,
   onSelectDay: onSelectDayHandler,
   Topic,
-  onAddHandler,
+  onAddCategoryHandler,
   onDeleteCategory,
 }) => {
   const [value, setValue] = useState("");
@@ -44,37 +45,12 @@ export const LeftSide = ({
           );
         })}
       </div>
-      <div className="flex gap-2 flex-col  ">
-        {calenderCreator(currentDate).map((week) => {
-          return (
-            <div className="flex justify-between" key={uuid()}>
-              {week.map((dateObject) => {
-                return (
-                  <span
-                    onClick={() => {
-                      if (dateObject != null) onSelectDayHandler(dateObject);
-                    }}
-                    className="w-8 h-8 flex justify-center items-center"
-                    style={
-                      dateObject != null
-                        ? selectedDate.format("DD/MM/YYYY") ===
-                          dateObject?.format("DD/MM/YYYY")
-                          ? { backgroundColor: "blue", borderRadius: "100%" }
-                          : isToDay(dateObject)
-                          ? { backgroundColor: "red", borderRadius: "100%" }
-                          : {}
-                        : {}
-                    }
-                    key={uuid()}
-                  >
-                    {dateObject != null ? dateObject.get("D") : null}
-                  </span>
-                );
-              })}
-            </div>
-          );
-        })}
-      </div>
+
+      <MakeWeek
+        currentDate={currentDate}
+        onSelectDayHandler={onSelectDayHandler}
+        selectedDate={selectedDate}
+      />
       <div className="mt-12 flex flex-col gap-4 text-gray-300">
         <p>Add Your Category</p>
         <div className=" flex gap-2 items-center">
@@ -102,7 +78,7 @@ export const LeftSide = ({
         ) : null}
         <button
           onClick={() => {
-            onAddHandler(value, color);
+            onAddCategoryHandler(value, color);
             setValue("");
             setColor("#00FA6C");
           }}

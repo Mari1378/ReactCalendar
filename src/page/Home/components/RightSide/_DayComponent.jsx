@@ -2,7 +2,12 @@ import React from "react";
 import { v4 as uuid } from "uuid";
 import { difrenceBetweenTwoTime } from "../../../../utils/Date";
 
-export const DayComponent = ({ onOpenModalHandler, todos, selectedDate }) => {
+export const DayComponent = ({
+  onOpenModalHandler,
+  todos,
+  selectedDate,
+  onOpenModalForEditHandler,
+}) => {
   const todosOnDay = todos.filter((todo) => {
     return todo.Date.format("DD/MM/YYYY") === selectedDate.format("DD/MM/YYYY");
   });

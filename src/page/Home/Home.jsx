@@ -10,7 +10,7 @@ export const Home = () => {
     { title: "general", id: uuid(), color: "#ff00a6" },
   ]);
 
-  const onAddHandler = (value, color) => {
+  const onAddCategoryHandler = (value, color) => {
     if (value) {
       if (Topic.length <= 4) {
         setTopic([
@@ -55,7 +55,7 @@ export const Home = () => {
         onGoToPrevMonth={onGoToPrevMonthHandler}
         onSelectDay={onSelectDayHandler}
         Topic={Topic}
-        onAddHandler={onAddHandler}
+        onAddCategoryHandler={onAddCategoryHandler}
         onDeleteCategory={onDeleteCategory}
       />
       <RightSide

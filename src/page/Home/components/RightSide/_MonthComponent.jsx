@@ -7,12 +7,8 @@ export const MonthComponent = ({
   selectedDate,
   todos,
   onOpenModalHandler,
-  onOpenModalHandlerForEdit,
+  onOpenModalForEditHandler,
 }) => {
-  // ..................................
-
-  // .....................................
-
   const dayOfWeek = [
     "Sunday",
     "Monday",
@@ -75,7 +71,7 @@ export const MonthComponent = ({
                         <li
                           onClick={(event) => {
                             event.stopPropagation();
-                            onOpenModalHandlerForEdit(day, todo.id);
+                            onOpenModalForEditHandler(day, todo.id);
                           }}
                           key={todo.id}
                           className="flex items-center gap-1"
