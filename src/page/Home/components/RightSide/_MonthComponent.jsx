@@ -59,7 +59,6 @@ export const MonthComponent = ({
                   >
                     {day ? day.get("D") : null}
                   </p>
-
                   <ul>
                     {todos.map((todo) => {
                       if (
