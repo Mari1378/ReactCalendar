@@ -11,7 +11,6 @@ export const DayComponent = ({
   const todosOnDay = todos.filter((todo) => {
     return todo.Date.format("DD/MM/YYYY") === selectedDate.format("DD/MM/YYYY");
   });
-  console.log(todosOnDay, "todo");
   const arrayOfTime = [
     "00:00",
     "01:00",
@@ -38,9 +37,15 @@ export const DayComponent = ({
     "22:00",
     "23:00",
   ];
-  const onOpenModalHandlerinDay = (selectedDate) => {
-    onOpenModalHandler(selectedDate);
-    console.log(selectedDate);
+  const onOpenModalHandlerinDay = (startTime) => {
+    const endTime =
+      startTime === "23:00"
+        ? "00:00"
+        : `${String(Number(startTime.split(":")[0])).length === 1 ? "0" : ""}${
+            Number(startTime.split(":")[0]) + 1
+          }:00`;
+    console.log(endTime);
+    onOpenModalHandler(selectedDate, startTime, endTime);
   };
   return (
     <div className="relative">
@@ -49,7 +54,7 @@ export const DayComponent = ({
           <div
             className="flex h-[60px] cursor-pointer relative"
             key={uuid()}
-            onClick={() => onOpenModalHandlerinDay(selectedDate)}
+            onClick={() => onOpenModalHandlerinDay(time)}
           >
             <p className="px-4 -mt-4 text-lg text-slate-700">{time}</p>
             <div className="border-t border-gray-200 grow h-full"></div>

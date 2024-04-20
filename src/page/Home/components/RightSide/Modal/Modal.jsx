@@ -9,14 +9,18 @@ export const Modal = ({
   Topic,
   dateForAddTask,
   defaultInputValue,
+  startTodo,
+  endTodo,
+  setStartTodo,
+  setendTodo,
+  setTitleOfTaskForEdit,
 }) => {
-  const [startTodo, setStartTodo] = useState("8:00");
-  const [endTodo, setendTodo] = useState("9:00");
   const [inputValue, setInputValue] = useState(defaultInputValue);
   const [selectedCategory, setSelectedCategory] = useState(Topic[0]);
   // ........................................
   const onCloseModalHandler = () => {
     setDateForAddTask(undefined);
+    setTitleOfTaskForEdit("");
   };
 
   return (
@@ -69,16 +73,14 @@ export const Modal = ({
       <div className="px-5 flex text-lg items-center gap-2 mb-4">
         <input
           type="time"
-          // step="3600"
-          // value={startTodo}
+          value={startTodo}
           name="time"
           onChange={(e) => setStartTodo(e.target.value)}
         />
         <Minus />
         <input
           type="time"
-          // step="3600"
-          // value={endTodo}
+          value={endTodo}
           name="time"
           onChange={(e) => setendTodo(e.target.value)}
         />

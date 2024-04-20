@@ -21,6 +21,8 @@ export const RightSide = ({
   const [isMonth, setIsMonth] = useState(true);
   const [dateForAddTask, setDateForAddTask] = useState();
   const [titleOfTaskForEdit, setTitleOfTaskForEdit] = useState("");
+  const [startTodo, setStartTodo] = useState("08:00:00");
+  const [endTodo, setendTodo] = useState("09:00:00");
   // .................................
   const addTodoHandler = (startTodo, endTodo, taskTitle, category) => {
     if (taskTitle) {
@@ -56,7 +58,11 @@ export const RightSide = ({
     setDateForAddTask(undefined);
   };
   // ............................................
-  const onOpenModalHandler = (date, id) => {
+  const onOpenModalHandler = (date, startTime, endTime) => {
+    if (startTime && endTime) {
+      setStartTodo(startTime);
+      setendTodo(endTime);
+    }
     setDateForAddTask(date);
     if (date != null) onSelectDayHandler(date);
     console.log(date);
@@ -72,9 +78,8 @@ export const RightSide = ({
   const onMonthHandler = () => {
     setIsMonth(true);
   };
-  const onDayHandler = (date) => {
+  const onDayHandler = () => {
     setIsMonth(false);
-    setSelectedDate(date);
   };
   // ............................................
   return (
@@ -110,6 +115,11 @@ export const RightSide = ({
           editTodo={editTodoHandler}
           dateForAddTask={dateForAddTask}
           defaultInputValue={titleOfTaskForEdit ? titleOfTaskForEdit : ""}
+          startTodo={startTodo}
+          endTodo={endTodo}
+          setStartTodo={setStartTodo}
+          setendTodo={setendTodo}
+          setTitleOfTaskForEdit={setTitleOfTaskForEdit}
         />
       ) : null}
     </div>
