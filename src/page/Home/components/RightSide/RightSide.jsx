@@ -38,6 +38,8 @@ export const RightSide = ({
         },
       });
       setDateForAddTask(undefined);
+      setStartTodo("08:00:00");
+      setendTodo("09:00:00");
     }
   };
   const deleteTodoHandler = (dateTodo) => {
@@ -46,6 +48,9 @@ export const RightSide = ({
       payload: dateTodo,
     });
     setDateForAddTask(undefined);
+    setTitleOfTaskForEdit("");
+    setStartTodo("08:00:00");
+    setendTodo("09:00:00");
   };
   const editTodoHandler = (dateTodo, taskTitle) => {
     dispatch({
@@ -56,6 +61,8 @@ export const RightSide = ({
       },
     });
     setDateForAddTask(undefined);
+    setStartTodo("08:00:00");
+    setendTodo("09:00:00");
   };
   // ............................................
   const onOpenModalHandler = (date, startTime, endTime) => {
@@ -65,7 +72,6 @@ export const RightSide = ({
     }
     setDateForAddTask(date);
     if (date != null) onSelectDayHandler(date);
-    console.log(date);
   };
   const onOpenModalForEditHandler = (date, id) => {
     setDateForAddTask(date);

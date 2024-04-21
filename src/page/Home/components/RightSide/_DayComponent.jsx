@@ -37,7 +37,7 @@ export const DayComponent = ({
     "22:00",
     "23:00",
   ];
-  const onOpenModalHandlerinDay = (startTime) => {
+  const onOpenModalInDayHandler = (startTime) => {
     const endTime =
       startTime === "23:00"
         ? "00:00"
@@ -54,7 +54,7 @@ export const DayComponent = ({
           <div
             className="flex h-[60px] cursor-pointer relative"
             key={uuid()}
-            onClick={() => onOpenModalHandlerinDay(time)}
+            onClick={() => onOpenModalInDayHandler(time)}
           >
             <p className="px-4 -mt-4 text-lg text-slate-700">{time}</p>
             <div className="border-t border-gray-200 grow h-full"></div>
@@ -65,6 +65,7 @@ export const DayComponent = ({
         return (
           <div
             key={todo.id}
+            onClick={() => onOpenModalForEditHandler(selectedDate, todo.id)}
             className="bg-red-300 text-white absolute left-[78px] right-0"
             style={{
               height: `${difrenceBetweenTwoTime(

@@ -20,20 +20,23 @@ export const Modal = ({
   // ........................................
   const onCloseModalHandler = () => {
     setDateForAddTask(undefined);
-    setTitleOfTaskForEdit("");
+    setInputValue("");
   };
 
   return (
     <div className="fixed shadow-2xl inset-y-1/4 inset-x-[550px] text-gray-600 flex gap-2 flex-col bg-white w-[320px] h-[400px] rounded-lg">
       <div className="flex justify-between items-center w-full bg-gray-100 h-12 text-2xl text-gray-500">
-        <button
-          onClick={() => {
-            deleteTodoHandler(dateForAddTask);
-          }}
-          className="px-4 py-2"
-        >
-          <DeleteIcon />
-        </button>
+        {defaultInputValue ? (
+          <button
+            onClick={() => {
+              deleteTodoHandler(dateForAddTask);
+            }}
+            className="px-4 py-2"
+          >
+            <DeleteIcon />
+          </button>
+        ) : null}
+
         <button onClick={onCloseModalHandler} className="px-4 py-2 ">
           <CloseIcon />
         </button>
