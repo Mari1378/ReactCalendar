@@ -7,7 +7,7 @@ export const HeaderRightSide = ({
   onDayHandler,
 }) => {
   return (
-    <div className=" p-5 h-20 flex justify-between items-center mb-8">
+    <div className="p-5 h-20 flex justify-between items-center mb-8">
       <button
         className="bg-slate-100 text-xl h-12 py-2 px-4"
         onClick={onTodayHandler}

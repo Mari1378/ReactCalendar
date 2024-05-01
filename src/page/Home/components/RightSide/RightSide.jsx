@@ -15,7 +15,6 @@ export const RightSide = ({
   selectedDate,
   onSelectDay: onSelectDayHandler,
   Topic,
-  setSelectedDate,
 }) => {
   const [todos, dispatch] = useReducer(makeTodo(), initialtodo);
   const [isMonth, setIsMonth] = useState(true);

@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
+import { v4 as uuid } from "uuid";
 import React, { useState } from "react";
 import { LeftSide, RightSide } from "./components";
-import { v4 as uuid } from "uuid";
 
 export const Home = () => {
   const [currentDate, setCurentDate] = useState(dayjs(new Date()));
@@ -64,7 +64,6 @@ export const Home = () => {
         selectedDate={selectedDate}
         onSelectDay={onSelectDayHandler}
         Topic={Topic}
-        setSelectedDate={setSelectedDate}
       />
     </div>
   );
