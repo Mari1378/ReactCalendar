@@ -22,6 +22,7 @@ export const RightSide = ({
   const [titleOfTaskForEdit, setTitleOfTaskForEdit] = useState("");
   const [startTodo, setStartTodo] = useState("08:00:00");
   const [endTodo, setendTodo] = useState("09:00:00");
+
   // .................................
   const addTodoHandler = (startTodo, endTodo, taskTitle, category) => {
     if (taskTitle) {

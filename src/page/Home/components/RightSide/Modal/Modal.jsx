@@ -13,6 +13,7 @@ export const Modal = ({
   endTodo,
   setStartTodo,
   setendTodo,
+  setTitleOfTaskForEdit,
 }) => {
   const [inputValue, setInputValue] = useState(defaultInputValue);
   const [selectedCategory, setSelectedCategory] = useState(Topic[0]);
@@ -20,6 +21,7 @@ export const Modal = ({
   const onCloseModalHandler = () => {
     setDateForAddTask(undefined);
     setInputValue("");
+    setTitleOfTaskForEdit("");
   };
 
   return (

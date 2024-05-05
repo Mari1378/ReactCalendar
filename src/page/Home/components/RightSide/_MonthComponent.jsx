@@ -1,6 +1,7 @@
 import React from "react";
 import { calenderCreator } from "../../../../utils/Date";
 import { v4 as uuid } from "uuid";
+import { colorWithLowOpacity } from "../../../../utils/color";
 
 export const MonthComponent = ({
   currentDate,
@@ -39,7 +40,7 @@ export const MonthComponent = ({
               return (
                 <div
                   onClick={() => onOpenModalHandler(day)}
-                  className="text-l cursor-pointer text-gray-900 font-thin border border-gray-200  w-full flex items-center p-1 flex-col "
+                  className="text-l cursor-pointer text-gray-900 gap-1 font-thin border border-gray-200  w-full flex items-center p-1 flex-col "
                   key={uuid()}
                 >
                   <p
@@ -59,7 +60,7 @@ export const MonthComponent = ({
                   >
                     {day ? day.get("D") : null}
                   </p>
-                  <ul>
+                  <ul className="w-28">
                     {todos.map((todo) => {
                       if (
                         todo.Date.format("DD/MM/YYYY") !==
@@ -73,15 +74,23 @@ export const MonthComponent = ({
                             onOpenModalForEditHandler(day, todo.id);
                           }}
                           key={todo.id}
-                          className="flex items-center gap-1"
+                          className="mb-1"
                         >
-                          <div
-                            className="w-4 h-4 rounded-2xl"
+                          <p
                             style={{
-                              backgroundColor: `${todo.category.color}`,
+                              color: colorWithLowOpacity(
+                                todo.category.color
+                              ).isLight()
+                                ? "black"
+                                : "white",
+                              backgroundColor: colorWithLowOpacity(
+                                todo.category.color
+                              ).toString(),
+                              borderLeft: `4px solid ${todo.category.color}`,
                             }}
-                          ></div>
-                          <p>{todo.title}</p>
+                          >
+                            {todo.title}
+                          </p>
                         </li>
                       );
                     })}
