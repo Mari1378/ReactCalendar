@@ -13,7 +13,6 @@ export const Modal = ({
   endTodo,
   setStartTodo,
   setendTodo,
-  setTitleOfTaskForEdit,
 }) => {
   const [inputValue, setInputValue] = useState(defaultInputValue);
   const [selectedCategory, setSelectedCategory] = useState(Topic[0]);

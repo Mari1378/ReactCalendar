@@ -44,7 +44,6 @@ export const DayComponent = ({
         : `${String(Number(startTime.split(":")[0])).length === 1 ? "0" : ""}${
             Number(startTime.split(":")[0]) + 1
           }:00`;
-    console.log(endTime);
     onOpenModalHandler(selectedDate, startTime, endTime);
   };
   return (
