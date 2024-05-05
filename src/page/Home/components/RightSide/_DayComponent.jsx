@@ -1,6 +1,7 @@
 import React from "react";
 import { v4 as uuid } from "uuid";
 import { difrenceBetweenTwoTime } from "../../../../utils/Date";
+import { colorWithLowOpacity } from "../../../../utils/color";
 
 export const DayComponent = ({
   onOpenModalHandler,
@@ -65,8 +66,13 @@ export const DayComponent = ({
           <div
             key={todo.id}
             onClick={() => onOpenModalForEditHandler(selectedDate, todo.id)}
-            className="bg-red-300 text-white absolute left-[78px] right-0"
+            className="absolute left-[78px] right-0 p-2"
             style={{
+              color: colorWithLowOpacity(todo.category.color).isLight()
+                ? "black"
+                : "white",
+              backgroundColor: colorWithLowOpacity(todo.category.color),
+              borderLeft: `4px solid ${todo.category.color}`,
               height: `${difrenceBetweenTwoTime(
                 todo.Date,
                 todo.startTime,

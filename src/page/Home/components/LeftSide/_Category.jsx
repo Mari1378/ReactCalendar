@@ -7,7 +7,7 @@ export const Category = ({ title, color, onDeleteCategory, id }) => {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div
-            style={{ backgroundColor: `${color}` }}
+            style={{ backgroundColor: color }}
             className="w-6 h-6 rounded-xl"
           ></div>
           <p>{title}</p>
